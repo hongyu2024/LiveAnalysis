@@ -73,9 +73,6 @@ def browse_for_file(entry_name, filetype):
     File_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
     entry_name.delete(0, END)
     entry_name.insert(0, File_path)
-    # 最关键的步骤就是使用xview_moveto(1) ，xview_moveto(0)表示显示左侧内容，xview_moveto(1)表示显示文本末尾内容
-    # 特别需要注意的是，需要先插入内容，再使用xview_moveto。
-    # 如果将entry_name.xview_moveto(1)  放在entry_name.insert(0, File_path)之前那么无法生效！
     entry_name.xview_moveto(1)
 
 
