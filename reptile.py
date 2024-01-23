@@ -15,7 +15,8 @@ def re_now(arg1, arg2, arg3):
     # text_name = 'doc\\' + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + '.txt'
     text_name = arg2
     start_time = time.time()  # 记录开始时间
-    end_time = start_time + arg3  # 计算结束时间点
+    end_time = start_time + int(arg3)*60
+    # 计算结束时间点
     # 创建浏览器实例
     driver = webdriver.Chrome()
 
