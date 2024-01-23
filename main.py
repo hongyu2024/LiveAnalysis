@@ -54,7 +54,11 @@ my_entry1 = my_tk.Entry(width=30)
 my_entry1.insert(my_tk.END, 60)
 my_entry1.place(x=250, y=60, width=40, height=30)
 my_text = my_tk.Text(width=50, height=30, undo=True, autoseparators=False)
-my_text.insert(my_tk.END, '点击开始进行抓取')
+#my_text.insert(my_tk.END, '点击开始进行抓取')
+file = open('read.txt', 'r', encoding='utf-8')
+rd_txt = file.read()
+my_text.insert(my_tk.END, rd_txt)
+file.close()
 my_text.place(x=10, y=130, width=380, height=440)
 btn = my_tk.Button(main_window, text='Start', command=lambda: bt_start(my_entry.get(), my_entry1.get()))
 btn.place(x=300, y=60, width=40, height=30)
@@ -80,7 +84,7 @@ def browse_for_file(entry_name, filetype):
 
 def open_txt(t_name):
     file1 = open(t_name, 'w', encoding='utf-8')
-    file1.write('开始抓取请等待......')
+    file1.write('即将打开Chrome浏览器抓取弹幕，请勿关闭。请等待......')
     file1.close()
     while True:
         my_text.delete(1.0, "end")
@@ -89,7 +93,7 @@ def open_txt(t_name):
         my_text.insert(my_tk.END, r_txt)
         file.close()
         my_text.see(my_tk.END)
-        time.sleep(1)
+        time.sleep(3)
 
 
 def bt_start(lid,ltime):
