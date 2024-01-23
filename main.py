@@ -48,13 +48,15 @@ label_ln6.place(x=410, y=400, width=100, height=30)
 label_pr = my_tk.Label(text="Power By HongYu2024")
 label_pr.place(x=640, y=570, width=150, height=30)
 my_entry = my_tk.Entry(width=30)
+my_entry.insert(my_tk.END, '567789235524')
 my_entry.place(x=70, y=60, width=110, height=30)
 my_entry1 = my_tk.Entry(width=30)
+my_entry1.insert(my_tk.END, 60)
 my_entry1.place(x=250, y=60, width=40, height=30)
 my_text = my_tk.Text(width=50, height=30, undo=True, autoseparators=False)
 my_text.insert(my_tk.END, '点击开始进行抓取')
 my_text.place(x=10, y=130, width=380, height=440)
-btn = my_tk.Button(main_window, text='Start', command=lambda: bt_start(my_entry.get()))
+btn = my_tk.Button(main_window, text='Start', command=lambda: bt_start(my_entry.get(), my_entry1.get()))
 btn.place(x=300, y=60, width=40, height=30)
 btn_stop = my_tk.Button(main_window, text='Stop', command=lambda: bt_start(my_entry.get()))
 btn_stop.place(x=350, y=60, width=40, height=30)
@@ -90,9 +92,9 @@ def open_txt(t_name):
         time.sleep(1)
 
 
-def bt_start(lid):
+def bt_start(lid,ltime):
     text_name = 'doc\\' + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + '.txt'
-    t1 = threading.Thread(target=reptile.re_now, kwargs={'arg1': lid, 'arg2': text_name})
+    t1 = threading.Thread(target=reptile.re_now, kwargs={'arg1': lid, 'arg2': text_name, 'arg3': ltime})
     t1.start()
     t2 = threading.Thread(target=open_txt, kwargs={'t_name': text_name})
     t2.start()

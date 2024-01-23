@@ -8,14 +8,14 @@ import time
 global result
 
 
-def re_now(arg1, arg2):
+def re_now(arg1, arg2, arg3):
     driver = ''
     text_name = ''
     end_time = time.time()
     # text_name = 'doc\\' + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + '.txt'
     text_name = arg2
     start_time = time.time()  # 记录开始时间
-    end_time = start_time + 6000  # 计算结束时间点
+    end_time = start_time + arg3  # 计算结束时间点
     # 创建浏览器实例
     driver = webdriver.Chrome()
 
