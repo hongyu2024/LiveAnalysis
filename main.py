@@ -138,16 +138,13 @@ def open_txt(t_name,event):
             print("文件未找到！")
         # 创建画布和子图对象
         fig = Figure(figsize=(78, 10), dpi=100)
-
         #ax.set_facecolor('blue')
         # 绘制柱状图
         canvas = FigureCanvasTkAgg(fig, master=main_window)
         ax = fig.add_subplot(1,1,1)
         bars = ax.bar(lines_word, lines_val)
-
         canvas.get_tk_widget().place(x=10, y=365, width=780, height=205)
         canvas.draw()
-
         time.sleep(3)
 
 

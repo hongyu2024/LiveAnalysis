@@ -44,5 +44,5 @@ def re_now(arg1, arg2, arg3, event1):
             #  file1 = open(text_name,'a',encoding='utf-8')
             file1.write(interact_msg.replace(old_val, "") + '\n')
             file1.close()
-            time.sleep(1)
+            time.sleep(2)
             old_val = interact_msg
