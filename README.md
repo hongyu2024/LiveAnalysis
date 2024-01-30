@@ -1,4 +1,6 @@
 The purpose of this project is for learning and research.
+
+ Crawler + data cleaning + visual analysis
 The purpose of the project is to analyze the live audience's live broadcast in Douyin in real time, 
 so as to optimize the live broadcast effect by analyzing the high-frequency words, positive and negative evaluation. 
 First of all, the software will capture the live broadcast live, 
