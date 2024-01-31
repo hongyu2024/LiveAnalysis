@@ -39,9 +39,9 @@ def re_now(arg1, arg2, arg3, event1):
         if old_val != interact_msg:
             #  print("弹幕聊天关注送礼消息")
             print(interact_msg.replace(old_val, ""))
-            print(event1)
-            file1 = open(text_name, 'w', encoding='utf-8')
-            #  file1 = open(text_name,'a',encoding='utf-8')
+
+            #file1 = open(text_name, 'w', encoding='utf-8')
+            file1 = open(text_name, 'a', encoding='utf-8')
             file1.write(interact_msg.replace(old_val, "") + '\n')
             file1.close()
             time.sleep(2)

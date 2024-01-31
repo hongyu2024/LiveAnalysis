@@ -2,7 +2,7 @@ import threading
 import tkinter as my_tk
 from datetime import time
 from tkinter.font import Font
-from tkinter import filedialog, W, END
+from tkinter import filedialog, W, END, Label
 import queue
 import datetime
 import time
@@ -11,6 +11,7 @@ from matplotlib import font_manager
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 plt.rcParams['font.sans-serif']=['kaiti']
+from PIL import Image, ImageTk
 
 import reptile
 import analysis
@@ -83,6 +84,23 @@ templ_entry = my_tk.Entry(main_window, textvariable=templ_filename, width=30, ju
 templ_entry.xview_moveto(1)
 templ_entry.place(x=470, y=60, width=220, height=30)
 filetype_fasta = [('fasta files', '*.fasta'), ('All files', '*.*')]
+image_e = Image.open("img\\exemple.png")
+image_e = image_e.resize((320, 240))
+photo_e = ImageTk.PhotoImage(image_e)
+label_e = Label(main_window, image=photo_e)
+label_e.place(x=410, y=130, width=380, height=190)
+
+image_h = Image.open("img\\Ht.png")
+image_h = image_h.resize((780, 205))
+photo_h = ImageTk.PhotoImage(image_h)
+label_h = Label(main_window, image=photo_h)
+label_h.place(x=10, y=365, width=780, height=205)
+
+image_a = Image.open("img\\emo.png")
+image_a = image_a.resize((320, 30))
+photo_a = ImageTk.PhotoImage(image_a)
+label_a = Label(main_window, image=photo_a)
+label_a.place(x=440, y=330, width=320, height=30)
 
 def browse_for_file(entry_name, filetype):
     File_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
@@ -107,7 +125,7 @@ def stop_thread():
 
 
 
-def open_txt(t_name,event):
+def open_txt(t_name,event,lid):
     file1 = open(t_name, 'w', encoding='utf-8')
     file1.write('正在打开Chrome浏览器抓取弹幕......\n初次打开过程可能较慢，请稍侯。\n使用过程中请勿关闭软件打开的直播界面!')
     file1.close()
@@ -118,7 +136,7 @@ def open_txt(t_name,event):
         my_text.insert(my_tk.END, r_txt)
         file.close()
         my_text.see(my_tk.END)
-        analysis.do_analysis(t_name)
+        analysis.do_analysis(t_name,lid)
         try:
             # 打开文本文件并逐行读取
             with open('key_word.txt', 'r', ) as file:
@@ -145,6 +163,11 @@ def open_txt(t_name,event):
         bars = ax.bar(lines_word, lines_val)
         canvas.get_tk_widget().place(x=10, y=365, width=780, height=205)
         canvas.draw()
+        image = Image.open('img\\'+lid+'.png')
+        image = image.resize((320, 240))
+        photo = ImageTk.PhotoImage(image)
+        label = Label(main_window, image=photo)
+        label.place(x=410, y=130, width=380, height=190)
         time.sleep(3)
 
 
@@ -153,14 +176,10 @@ def bt_start(lid,ltime):
     btn_stop.config(state='active')
     text_name = 'doc\\' + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + '.txt'
     event1.set()
-    print(event1)
     t1 = threading.Thread(target=reptile.re_now, kwargs={'arg1': lid, 'arg2': text_name, 'arg3': ltime,'event1':event1},name='t1')
     t1.start()
-   # t1.join(timeout=3)
-
     event.set()
-    print(event)
-    t2 = threading.Thread(target=open_txt, kwargs={'t_name': text_name,'event':event},name='t2')
+    t2 = threading.Thread(target=open_txt, kwargs={'t_name': text_name,'event':event,'lid':lid},name='t2')
     t2.start()
 
 
