@@ -4,9 +4,10 @@ import jieba  # pip install jieba
 import collections
 from wordcloud import WordCloud, ImageColorGenerator, STOPWORDS  # pip install WordCloud
 import matplotlib.pyplot as plt
+import numpy as np
 from PIL import Image
 
-def do_analysis(txt_file):
+def do_analysis(txt_file,live_id):
     # 读取数据
     path = r"doc\2024-01-25-14-46-42.txt"
     path = txt_file
@@ -53,8 +54,8 @@ def do_analysis(txt_file):
             file.write(str(item) + '\n')
         file.close()
 
-
-    img_mask = plt.imread('bg.png') * 255
+    #img_mask = plt.imread('live.png') * 255
+    img_mask = np.array(Image.open("live.png"))  #将图片转为数组。
     my_wordcloud = WordCloud(
         background_color='white',  # 设置背景颜色
         mask=img_mask,  # 背景图片
@@ -62,15 +63,16 @@ def do_analysis(txt_file):
         stopwords=STOPWORDS,  # 设置停用词
         # 设置字体格式，字体格式 .ttf文件需自己网上下载，最好将名字改为英文，中文名路径加载可能会出现问题。
         font_path='simhei.ttf',
-        max_font_size=100,  # 设置字体最大值
+        max_font_size=50,  # 设置字体最大值
         random_state=50,  # 设置随机生成状态，即多少种配色方案
         ##提高清晰度
         width=1000, height=600,
-        min_font_size=20,
+        min_font_size=5,
     ).generate_from_frequencies(word_counts)
     plt.imshow(my_wordcloud)
     plt.axis('off')
     #plt.show()
+    plt.savefig('img\\'+live_id+'.png')
 
 
-#do_analysis()
+#do_analysis('doc\\2024-01-25-14-46-42.txt')
